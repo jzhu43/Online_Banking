@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="common/adminheader :: common-adminheader"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/adminheader :: navbar"/> 
+<!-- <title>Check Book Requests</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head> -->
+
+<h2 align="center">Check Book Requests</h2>
+
+<body>
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div th:switch="${userCheckbookReqList}" class="container my-4">
+					<div class="col-md-10">
+						<h2 th:case="null">No checkbooks found!</h2>
+						<div th:case="*">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>User ID</th>
+										<th>User Name</th>
+										<th>Account</th>
+										<th>Description</th>
+										<th>Confirmed?</th>
+										<th>Action</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="check : ${userCheckbookReqList}">
+										<td th:text="${check.userId}"></td>
+										<td th:text="${check.userName}"></td>
+										<td th:text="${check.accountType}"></td>
+										<td th:text="${check.description}"></td>
+										<td th:switch="${check.confirmed}">
+											<p th:case="true">Confirmed</p>
+											<p th:case="*">Pending</p></td>
+										<td th:switch="${check.confirmed}">
+											<p th:case="false"><a th:href="@{/admin/confirm/{requestNumber}(requestNumber=${check.requestNumber})}" class="btn btn-primary">Confirm</a></p>
+											<p th:case="*"></p>
+										</td>
+									</tr>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	 <div th:replace="common/adminheader :: body-bottom-scripts"/>
+	
+</body>
+</html>

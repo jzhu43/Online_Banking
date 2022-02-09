@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+        	<h2>Request New Check Book</h2>
+			<br/>
+			
+			<form th:action="@{/requestCheckBook}" method="post" th:object="${checkBookReq}">
+                <div class="form-group" >
+                    <label for="accountType">1. Select an account:</label>
+                    <select class="form-control" th:value="*{accountType}" name="accountType" id="accountType" required="required">
+                        <option value="primary">Primary</option>
+                        <option value="savings">Savings</option>
+                    </select>
+                    <br />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">2. Description:</label><br>
+                    <textarea class="text-box" th:field="*{description}" name="description" id="description" style="width: 100%;"></textarea>
+                </div>
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit Request</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+	
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>
